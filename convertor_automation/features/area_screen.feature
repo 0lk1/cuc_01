@@ -4,6 +4,7 @@ Feature: User is able to convert area units
 
   Background:
     Given I click on Got it button
+    And I land on Area screen
 
 #  Scenario: User is able to dismiss help
 #    Given I land on help popup
@@ -27,12 +28,31 @@ Feature: User is able to convert area units
       |2     |2000000|
       |3     |3000000|
 
-  @wip
   Scenario: User is able to use soft keyboard to enter values
     Given I click on Clear button
     When I click on From field
-    And I press "3" on soft keyboard
-    Then I get "3000000" in To field
+    And I press "25" on soft keyboard
+    Then I get "25000000" in To field
+
+  Scenario:
+    When I select "Hecrare" from left column
+    Then I see "Hectare" in From header
+    And I get "10000" in To field
+
+  @wip
+  Scenario Outline:
+    Given I click on Clear button
+    And I click on From field
+    And I enter "1" on soft keyboard
+    When swipe in the From list
+    And I select "<target>" from left column
+    Then I get "<result>" in To field
+
+    Examples:
+      |target|result|
+      |Sq Metre|1     |
+      |Sq Yard |0.8361|
+      |Hectare* |10000 |
 
 
 

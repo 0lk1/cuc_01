@@ -48,6 +48,29 @@ When(/^I click on From field$/) do
 end
 
 And(/^I press "([^"]*)" on soft keyboard$/) do |value|
+  digits = value.split("")
+  digits.each do |key|
+  digit = Integer(key)
+  press_keycode 7 + digit
+  end
+end
+
+
+When(/^I select "([^"]*)" from left column$/) do |value|
+  select_from_item(value)
+end
+
+
+And(/^I enter "([^"]*)" on soft keyboard$/) do |value|
   digit = Integer(value)
   press_keycode 7 + digit
+end
+
+And(/^I select "([^"]*)" from From menu$/) do |arg|
+  pending
+end
+
+When(/^swipe in the From list$/) do
+  action = Appium::TouchAction.new.swipe(start_x: 0.5, start_y: 0.1, end_x: 0.5, end_y: 0.9, duration: 500)
+  action.perform
 end
